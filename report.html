@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
   <title>דוח בדיקה | RentalRisk AI</title>
+
   <style>
     :root {
       --bg: #07111f;
@@ -35,7 +36,7 @@
     }
 
     .wrap {
-      max-width: 960px;
+      max-width: 1080px;
       margin: 0 auto;
       padding: 28px 18px 54px;
     }
@@ -99,9 +100,25 @@
       backdrop-filter: blur(18px);
     }
 
+    .loading,
+    .error {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 24px;
+      padding: 22px;
+      color: #cbd5e1;
+      text-align: center;
+    }
+
+    .error {
+      border-color: rgba(252,165,165,.25);
+      background: rgba(252,165,165,.10);
+      color: #fecaca;
+    }
+
     .meta {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
       margin-bottom: 22px;
     }
@@ -128,7 +145,8 @@
       line-height: 1.25;
     }
 
-    .risk-pill {
+    .risk-pill,
+    .neutral-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -138,6 +156,12 @@
       font-weight: 900;
       width: max-content;
       margin-top: 7px;
+    }
+
+    .neutral-pill {
+      border: 1px solid rgba(103,232,249,.28);
+      background: rgba(103,232,249,.11);
+      color: #cffafe;
     }
 
     .risk-high {
@@ -268,6 +292,72 @@
       font-weight: 700;
     }
 
+    .recommendation {
+      border: 1px solid #bae6fd;
+      background: #f0f9ff;
+      color: #0f172a;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .recommendation strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .irrelevant-hero {
+      text-align: center;
+      padding: 26px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(103,232,249,.18), transparent 35%),
+        #ffffff;
+      color: #111827;
+    }
+
+    .irrelevant-icon {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 16px;
+      border-radius: 26px;
+      display: grid;
+      place-items: center;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 34px;
+    }
+
+    .not-scored-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid #bae6fd;
+      background: #f0f9ff;
+      color: #0369a1;
+    }
+
+    .expected-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .expected-card {
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 12px;
+      color: #111827;
+      font-weight: 700;
+    }
+
     .disclaimer {
       margin-top: 24px;
       color: #6b7280;
@@ -310,22 +400,6 @@
       color: var(--muted);
       font-size: 12px;
       text-align: center;
-    }
-
-    .loading,
-    .error {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 24px;
-      padding: 22px;
-      color: #cbd5e1;
-      text-align: center;
-    }
-
-    .error {
-      border-color: rgba(252,165,165,.25);
-      background: rgba(252,165,165,.10);
-      color: #fecaca;
     }
 
     @media print {
@@ -371,7 +445,7 @@
       }
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 760px) {
       .top {
         align-items: flex-start;
         flex-direction: column;
@@ -391,6 +465,10 @@
 
       .flag-top {
         flex-direction: column;
+      }
+
+      .expected-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -494,9 +572,21 @@
       return `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
     }
 
+    function renderExpectedDocuments(items) {
+      if (!Array.isArray(items) || items.length === 0) {
+        return "<p>לא צוינו.</p>";
+      }
+
+      return `
+        <div class="expected-grid">
+          ${items.map((item) => `<div class="expected-card">${escapeHtml(item)}</div>`).join("")}
+        </div>
+      `;
+    }
+
     function renderFlags(flags) {
       if (!Array.isArray(flags) || flags.length === 0) {
-        return "<p>לא זוהו דגלים אדומים משמעותיים במסמכים שצורפו.</p>";
+        return "<p>לא זוהו אנומליות משמעותיות במסמכים שצורפו.</p>";
       }
 
       return `
@@ -504,7 +594,7 @@
           ${flags.map((flag) => `
             <article class="flag">
               <div class="flag-top">
-                <h3>${escapeHtml(flag.title || "דגל אדום")}</h3>
+                <h3>${escapeHtml(flag.title || "אנומליה")}</h3>
                 <span class="severity ${severityClass(flag.severity)}">${escapeHtml(severityLabel(flag.severity))}</span>
               </div>
               <p>${escapeHtml(flag.explanation || "")}</p>
@@ -519,23 +609,90 @@
       const reportJson = data?.report?.report_json || {};
       const report = data?.report || {};
 
+      const explicitIrrelevant =
+        reportJson.report_type === "irrelevant" ||
+        reportJson.is_rental_relevant === false;
+
+      const inferredIrrelevant =
+        String(reportJson.summary || "").includes("לא ניתן לחשב ציון סיכון") ||
+        String(reportJson.title || "").includes("אינו מתאים לבדיקת שכירות");
+
+      const isIrrelevant = explicitIrrelevant || inferredIrrelevant;
+
       return {
-        risk_score: reportJson.risk_score ?? report.risk_score ?? "",
-        risk_level: reportJson.risk_level ?? report.risk_level ?? "",
+        report_type: isIrrelevant
+          ? "irrelevant"
+          : (reportJson.report_type || "rental_risk_report"),
+
+        is_rental_relevant: !isIrrelevant,
+
+        title:
+          reportJson.title ||
+          (isIrrelevant
+            ? "המסמך שהועלה אינו מתאים לבדיקת שכירות"
+            : "דוח סיכון ראשוני לעסקת שכירות"),
+
+        // חשוב: בדוח לא רלוונטי לא מחזירים בכלל ציון או רמת סיכון
+        risk_score: isIrrelevant ? null : (reportJson.risk_score ?? report.risk_score ?? ""),
+        risk_level: isIrrelevant ? null : (reportJson.risk_level ?? report.risk_level ?? ""),
+
         status: report.status || "draft",
         summary: reportJson.summary || "",
+        reason: reportJson.reason || "",
+        uploaded_files: reportJson.uploaded_files || "",
+        expected_documents: reportJson.expected_documents || [],
+        recommended_action: reportJson.recommended_action || "",
         missing_documents: reportJson.missing_documents || [],
         red_flags: reportJson.red_flags || [],
         questions_to_landlord: reportJson.questions_to_landlord || [],
         do_not_do_before: reportJson.do_not_do_before || [],
-        disclaimer: reportJson.disclaimer || "הדוח הוא בדיקת סיכון ראשונית בלבד ואינו ייעוץ משפטי.",
+        disclaimer:
+          reportJson.disclaimer ||
+          "הדוח הוא בדיקת סיכון ראשונית בלבד ואינו ייעוץ משפטי.",
       };
     }
 
-    function renderReport(data) {
-      const report = normalizeReport(data);
+    function renderIrrelevantReport(report) {
+      app.className = "card";
+      app.innerHTML = `
+        <div class="report-content">
+          <div class="irrelevant-hero">
+            <div class="irrelevant-icon">📄</div>
+            <div class="not-scored-pill">לא חושב ציון סיכון</div>
+            <h1>${escapeHtml(report.title || "המסמך שהועלה אינו מתאים לבדיקת שכירות")}</h1>
+            <p class="summary">${escapeHtml(report.summary)}</p>
+
+            ${
+              report.uploaded_files
+                ? `<p class="summary"><strong>קובץ שהועלה:</strong> ${escapeHtml(report.uploaded_files)}</p>`
+                : ""
+            }
+
+            ${
+              report.reason
+                ? `<p class="summary"><strong>סיבת הסיווג:</strong> ${escapeHtml(report.reason)}</p>`
+                : ""
+            }
+          </div>
+
+          <div class="section">
+            <h2>כדי לבצע בדיקת שכירות, העלו אחד מהמסמכים הבאים</h2>
+            ${renderExpectedDocuments(report.expected_documents)}
+          </div>
+
+          <p class="disclaimer">${escapeHtml(report.disclaimer)}</p>
+        </div>
+
+        <div class="actions">
+          <a class="button" href="/">העלאת מסמך אחר</a>
+        </div>
+      `;
+    }
+
+    function renderRentalRiskReport(report) {
       const riskLabel = riskLevelLabel(report.risk_level);
       const badgeClass = riskBadgeClass(report.risk_level);
+      const anomalyCount = Array.isArray(report.red_flags) ? report.red_flags.length : 0;
 
       app.className = "card";
       app.innerHTML = `
@@ -551,6 +708,11 @@
           </div>
 
           <div class="metric">
+            <small>אנומליות</small>
+            <b>${escapeHtml(anomalyCount)}</b>
+          </div>
+
+          <div class="metric">
             <small>סטטוס</small>
             <b>${escapeHtml(statusLabel(report.status))}</b>
           </div>
@@ -559,16 +721,27 @@
         <div class="report-content">
           <h1>דוח סיכון ראשוני לעסקת שכירות</h1>
 
+          ${
+            report.recommended_action
+              ? `
+                <div class="recommendation">
+                  <strong>המלצה מרכזית</strong>
+                  <div>${escapeHtml(report.recommended_action)}</div>
+                </div>
+              `
+              : ""
+          }
+
           <p class="summary">${escapeHtml(report.summary)}</p>
+
+          <div class="section">
+            <h2>אנומליות ודגלים אדומים</h2>
+            ${renderFlags(report.red_flags)}
+          </div>
 
           <div class="section">
             <h2>מסמכים חסרים</h2>
             ${renderList(report.missing_documents)}
-          </div>
-
-          <div class="section">
-            <h2>דגלים אדומים</h2>
-            ${renderFlags(report.red_flags)}
           </div>
 
           <div class="section">
@@ -589,6 +762,17 @@
           <a class="button secondary" href="/">חזרה לאתר</a>
         </div>
       `;
+    }
+
+    function renderReport(data) {
+      const report = normalizeReport(data);
+
+      if (report.report_type === "irrelevant" || report.is_rental_relevant === false) {
+        renderIrrelevantReport(report);
+        return;
+      }
+
+      renderRentalRiskReport(report);
     }
 
     async function loadReport() {
