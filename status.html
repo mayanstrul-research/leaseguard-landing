@@ -293,7 +293,7 @@
           throw new Error(data.error || "לא ניתן לטעון סטטוס");
         }
 
-        if (data.status === "ready" && data.report?.url) {
+        if (data.status === "ready" && data.report?.token) {
           setStepReady();
           statusPill.textContent = "הדוח מוכן";
           title.textContent = "הדוח הראשוני מוכן";
@@ -301,8 +301,10 @@
           rawStatus.textContent = `ציון סיכון: ${data.report.risk_score} / 100`;
           rawStatus.classList.remove("error");
 
+          const localReportUrl = `/report.html?token=${encodeURIComponent(data.report.token)}`;
+
           actions.innerHTML = `
-            <a class="btn primary" href="${data.report.url}">פתח דוח</a>
+            <a class="btn primary" href="${localReportUrl}">פתח דוח</a>
             <a class="btn secondary" href="/">חזרה לאתר</a>
           `;
           return;
