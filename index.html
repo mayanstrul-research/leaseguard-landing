@@ -4,24 +4,1229 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RentalRisk AI | בדיקת שכירות לפני חתימה</title>
-  <meta name="description" content="בדיקת סיכון לעסקת שכירות לפני חתימה: חוזה, פיקדון, בעלות והרשאה." />
+  <meta name="description" content="בדיקת סיכון לעסקת שכירות לפני חתימה: חוזה, פיקדון, בעלות, הרשאה ודגלים אדומים." />
+
   <style>
-    :root{--bg:#07111f;--panel:rgba(255,255,255,.045);--panel2:rgba(255,255,255,.035);--border:rgba(255,255,255,.1);--muted:#94a3b8;--cyan:#67e8f9;--green:#86efac;--amber:#fbbf24;--red:#fca5a5}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;color:#fff;background:radial-gradient(circle at 86% -8%,rgba(103,232,249,.16),transparent 32%),radial-gradient(circle at 5% 35%,rgba(134,239,172,.1),transparent 28%),#07111f;line-height:1.6}a{text-decoration:none;color:inherit}.wrap{max-width:1120px;margin:auto;padding:0 22px}header{border-bottom:1px solid var(--border);background:rgba(255,255,255,.03);backdrop-filter:blur(16px);position:sticky;top:0;z-index:10}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--green));color:#07111f;font-weight:900;font-size:20px;box-shadow:0 14px 36px rgba(45,212,191,.22)}.brand strong{display:block;font-size:16px}.brand span{display:block;color:var(--muted);font-size:12px}.badge{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.07);padding:7px 12px;color:#e2e8f0;font-size:12px;font-weight:900;white-space:nowrap}.cyan{border-color:rgba(103,232,249,.25);background:rgba(103,232,249,.1);color:#cffafe}.green{border-color:rgba(134,239,172,.25);background:rgba(134,239,172,.1);color:#dcfce7}.amber{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.1);color:#fef3c7}.red{border-color:rgba(252,165,165,.25);background:rgba(252,165,165,.12);color:#fee2e2}.hero{display:grid;grid-template-columns:1.02fr .98fr;gap:32px;align-items:center;padding:56px 0 34px}h1{margin:18px 0;max-width:760px;font-size:clamp(39px,6vw,67px);line-height:1.05;letter-spacing:-.045em}.grad{background:linear-gradient(90deg,var(--green),#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}.lead{max-width:690px;margin:0 0 26px;color:#cbd5e1;font-size:20px;line-height:1.75}.actions{display:flex;flex-wrap:wrap;gap:12px}.btn{min-height:52px;border:0;border-radius:18px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-weight:900;font-size:16px;transition:.18s ease;text-align:center}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}.primary{color:#07111f;background:linear-gradient(90deg,var(--cyan),#5eead4,var(--green));box-shadow:0 18px 50px rgba(45,212,191,.24)}.secondary{color:#fff;background:rgba(255,255,255,.07);border:1px solid var(--border)}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;max-width:690px}.metric{border:1px solid var(--border);background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border-radius:24px;padding:18px}.metric small{color:var(--muted);font-weight:800}.metric b{display:block;margin-top:4px;font-size:34px;line-height:1}.metric span{display:block;margin-top:6px;color:#9aa8bb;font-size:12px}.panel{border:1px solid var(--border);background:var(--panel);border-radius:30px;box-shadow:0 24px 90px rgba(0,0,0,.32);backdrop-filter:blur(18px)}.report{overflow:hidden}.report-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 22px;border-bottom:1px solid var(--border)}.report-head small{color:var(--muted);font-weight:800}.report-head h2{margin:2px 0 0;font-size:25px}.report-body{padding:22px}.report-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.report-metric{border:1px solid var(--border);background:var(--panel2);border-radius:22px;padding:16px}.report-metric small{color:var(--muted);font-weight:800;font-size:12px}.report-metric b{display:block;margin-top:4px;font-size:31px}.recommend,.included{margin-top:14px;border-radius:22px;padding:16px}.recommend{border:1px solid rgba(134,239,172,.22);background:rgba(134,239,172,.1)}.included{border:1px solid var(--border);background:var(--panel2)}.recommend strong{color:#dcfce7}.recommend p,.included p{margin:7px 0 0;color:#dbeafe;font-size:14px}.included p{color:var(--muted)}.grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;padding:18px 0 28px}.card-pad{padding:24px}.card-title{margin:0;font-size:30px;line-height:1.15}.sub{margin:8px 0 0;color:var(--muted);font-size:14px}.upload-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px}.upload-btn{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 18px;border-radius:16px;border:1px solid rgba(103,232,249,.25);background:rgba(103,232,249,.1);color:#cffafe;font-weight:900;white-space:nowrap}.files{display:flex;flex-direction:column;gap:10px}.file-row{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--border);background:rgba(255,255,255,.04);border-radius:18px;padding:12px 14px}.file-main{display:flex;align-items:center;gap:12px;min-width:0}.file-icon{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:rgba(103,232,249,.12);flex:0 0 auto}.file-name{font-size:14px;font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file-meta{color:var(--muted);font-size:12px}.remove{border:1px solid var(--border);background:rgba(255,255,255,.035);color:#cbd5e1;border-radius:12px;padding:8px 12px;cursor:pointer;flex:0 0 auto}.table-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:16px}.score-box{border:1px solid rgba(251,191,36,.22);background:rgba(251,191,36,.1);border-radius:18px;padding:11px 14px;min-width:130px}.score-box small{display:block;color:#fde68a;font-weight:900;font-size:12px}.score-box b{font-size:28px}.score-box span{color:#94a3b8;font-size:13px}.risk-table{overflow:hidden;border:1px solid var(--border);border-radius:22px}.risk-row{display:grid;grid-template-columns:100px 1fr 165px;gap:14px;padding:14px 16px;border-bottom:1px solid var(--border);align-items:start}.risk-row:last-child{border-bottom:0}.risk-row.head{background:rgba(255,255,255,.035);color:var(--muted);font-size:12px;font-weight:900}.risk-row h3{margin:0;color:#fff;font-size:15px;line-height:1.55}.risk-row p{margin:0;color:var(--muted);font-size:12px;line-height:1.65}.severity{display:inline-flex;justify-content:center;border:1px solid var(--border);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:900;width:max-content}.high{border-color:rgba(252,165,165,.25);background:rgba(252,165,165,.12);color:#fee2e2}.med{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.12);color:#fef3c7}.benefits{padding:18px 0 32px}.benefit-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px}.benefit-head h2{margin:0;font-size:32px}.benefit-head p{max-width:560px;margin:0;color:var(--muted);font-size:14px}.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.benefit{border:1px solid var(--border);background:var(--panel);border-radius:24px;padding:20px}.benefit-icon{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;margin-bottom:14px;background:rgba(103,232,249,.1);font-size:22px}.benefit h3{margin:0 0 8px;font-size:18px}.benefit p{margin:0;color:var(--muted);font-size:14px}.cta{max-width:820px;margin:18px auto 62px;padding:28px}.cta-center{text-align:center}.cta h2{margin:14px 0 10px;font-size:clamp(31px,4.5vw,48px);line-height:1.12}.intro{margin:0 auto 20px;max-width:650px;color:#cbd5e1;font-size:15px;text-align:center}.price-box{max-width:430px;margin:18px auto 0;border:1px solid rgba(134,239,172,.22);background:rgba(134,239,172,.1);border-radius:24px;padding:16px;text-align:center}.price-box strong{display:block;color:#dcfce7;font-size:16px}.price-box span{display:block;margin-top:5px;color:#cbd5e1;font-size:12px;line-height:1.7}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}input,textarea{width:100%;min-height:48px;border:1px solid var(--border);background:rgba(255,255,255,.055);color:#fff;border-radius:16px;outline:none;padding:0 14px;font-size:15px;font-family:inherit}input:focus,textarea:focus{border-color:rgba(103,232,249,.45)}input::placeholder,textarea::placeholder{color:#64748b}textarea{min-height:96px;padding:12px 14px;resize:vertical}.wide{grid-column:1/-1}.consent{display:flex;align-items:flex-start;gap:10px;margin:16px 0;color:#cbd5e1;font-size:13px;line-height:1.7;border:1px solid var(--border);background:rgba(255,255,255,.035);border-radius:18px;padding:14px}.consent input{width:18px;min-height:18px;margin-top:3px;flex:0 0 auto}.submit-row{display:flex;justify-content:center;margin-top:12px}.status{display:none;margin-top:14px;border-radius:18px;padding:14px 16px;font-size:14px;font-weight:900;text-align:center}.status.ok{display:block;border:1px solid rgba(134,239,172,.25);background:rgba(134,239,172,.1);color:#bbf7d0}.status.err{display:block;border:1px solid rgba(252,165,165,.25);background:rgba(252,165,165,.1);color:#fecaca}.note{margin-top:12px;color:var(--muted);font-size:12px;text-align:center}details{margin:18px auto 0;max-width:650px;border:1px solid var(--border);background:rgba(255,255,255,.035);border-radius:18px;padding:14px;color:var(--muted);font-size:12px}summary{cursor:pointer;color:#cbd5e1;font-weight:900}.test-row{display:flex;justify-content:space-between;gap:12px;margin-top:10px}.pass{color:#86efac;font-weight:900}.fail{color:#fca5a5;font-weight:900}@media(max-width:920px){header{position:static}.hero,.grid{grid-template-columns:1fr}.metrics,.report-metrics,.benefit-grid,.form-grid{grid-template-columns:1fr}.table-head,.upload-top,.benefit-head{flex-direction:column;align-items:stretch}.risk-row{grid-template-columns:88px 1fr}.risk-row.head div:nth-child(3),.risk-row .action{display:none}h1{font-size:42px}.lead{font-size:17px}.btn{width:100%}.wide{grid-column:auto}}
+    :root {
+      --bg: #07111f;
+      --panel: rgba(255, 255, 255, 0.045);
+      --panel2: rgba(255, 255, 255, 0.035);
+      --border: rgba(255, 255, 255, 0.10);
+      --muted: #94a3b8;
+      --cyan: #67e8f9;
+      --green: #86efac;
+      --amber: #fbbf24;
+      --red: #fca5a5;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans Hebrew", sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 86% -8%, rgba(103, 232, 249, 0.16), transparent 32%),
+        radial-gradient(circle at 5% 35%, rgba(134, 239, 172, 0.10), transparent 28%),
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.075), transparent 34%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: auto;
+      padding: 0 22px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      color: #07111f;
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 14px 36px rgba(45, 212, 191, 0.22);
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.07);
+      padding: 7px 12px;
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .badge.cyan {
+      border-color: rgba(103, 232, 249, 0.25);
+      background: rgba(103, 232, 249, 0.10);
+      color: #cffafe;
+    }
+
+    .badge.green {
+      border-color: rgba(134, 239, 172, 0.25);
+      background: rgba(134, 239, 172, 0.10);
+      color: #dcfce7;
+    }
+
+    .badge.amber {
+      border-color: rgba(251, 191, 36, 0.25);
+      background: rgba(251, 191, 36, 0.10);
+      color: #fef3c7;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 32px;
+      align-items: center;
+      padding: 56px 0 34px;
+    }
+
+    h1 {
+      margin: 18px 0;
+      max-width: 760px;
+      font-size: clamp(39px, 6vw, 67px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .grad {
+      background: linear-gradient(90deg, var(--green), #ffffff, var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      max-width: 690px;
+      margin: 0 0 26px;
+      color: #cbd5e1;
+      font-size: 20px;
+      line-height: 1.75;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      min-height: 52px;
+      border: 0;
+      border-radius: 18px;
+      padding: 0 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 16px;
+      transition: 0.18s ease;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn.primary {
+      color: #07111f;
+      background: linear-gradient(90deg, var(--cyan), #5eead4, var(--green));
+      box-shadow: 0 18px 50px rgba(45, 212, 191, 0.24);
+    }
+
+    .btn.secondary {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+      max-width: 690px;
+    }
+
+    .metric {
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    .metric small {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .metric b {
+      display: block;
+      margin-top: 4px;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      color: #9aa8bb;
+      font-size: 12px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 30px;
+      box-shadow: 0 24px 90px rgba(0, 0, 0, 0.32);
+      backdrop-filter: blur(18px);
+    }
+
+    .report {
+      overflow: hidden;
+    }
+
+    .report-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .report-head small {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .report-head h2 {
+      margin: 2px 0 0;
+      font-size: 25px;
+      line-height: 1.2;
+    }
+
+    .report-body {
+      padding: 22px;
+    }
+
+    .report-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .report-metric {
+      border: 1px solid var(--border);
+      background: var(--panel2);
+      border-radius: 22px;
+      padding: 16px;
+    }
+
+    .report-metric small {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .report-metric b {
+      display: block;
+      margin-top: 4px;
+      font-size: 31px;
+    }
+
+    .recommend,
+    .included {
+      margin-top: 14px;
+      border-radius: 22px;
+      padding: 16px;
+    }
+
+    .recommend {
+      border: 1px solid rgba(134, 239, 172, 0.22);
+      background: rgba(134, 239, 172, 0.10);
+    }
+
+    .included {
+      border: 1px solid var(--border);
+      background: var(--panel2);
+    }
+
+    .recommend strong {
+      color: #dcfce7;
+    }
+
+    .recommend p,
+    .included p {
+      margin: 7px 0 0;
+      color: #dbeafe;
+      font-size: 14px;
+    }
+
+    .included p {
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      padding: 18px 0 28px;
+    }
+
+    .card-pad {
+      padding: 24px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    .sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .upload-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .upload-btn {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(103, 232, 249, 0.25);
+      background: rgba(103, 232, 249, 0.10);
+      color: #cffafe;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .files {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .file-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 18px;
+      padding: 12px 14px;
+    }
+
+    .file-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .file-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(103, 232, 249, 0.12);
+      color: #cffafe;
+      flex: 0 0 auto;
+    }
+
+    .file-name {
+      font-size: 14px;
+      font-weight: 900;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .remove {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035);
+      color: #cbd5e1;
+      border-radius: 12px;
+      padding: 8px 12px;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .table-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .score-box {
+      border: 1px solid rgba(251, 191, 36, 0.22);
+      background: rgba(251, 191, 36, 0.10);
+      border-radius: 18px;
+      padding: 11px 14px;
+      min-width: 130px;
+    }
+
+    .score-box small {
+      display: block;
+      color: #fde68a;
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .score-box b {
+      font-size: 28px;
+    }
+
+    .score-box span {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .risk-table {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+    }
+
+    .risk-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 165px;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .risk-row:last-child {
+      border-bottom: 0;
+    }
+
+    .risk-row.head {
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .risk-row h3 {
+      margin: 0;
+      color: white;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .risk-row p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .severity {
+      display: inline-flex;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 900;
+      width: max-content;
+    }
+
+    .severity.high {
+      border-color: rgba(252, 165, 165, 0.25);
+      background: rgba(252, 165, 165, 0.12);
+      color: #fee2e2;
+    }
+
+    .severity.med {
+      border-color: rgba(251, 191, 36, 0.25);
+      background: rgba(251, 191, 36, 0.12);
+      color: #fef3c7;
+    }
+
+    .benefits {
+      padding: 18px 0 32px;
+    }
+
+    .benefit-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .benefit-head h2 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .benefit-head p {
+      max-width: 560px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .benefit {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 24px;
+      padding: 20px;
+      transition: 0.18s ease;
+    }
+
+    .benefit:hover {
+      transform: translateY(-2px);
+      border-color: rgba(103, 232, 249, 0.25);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .benefit-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      background: rgba(103, 232, 249, 0.10);
+      color: #cffafe;
+      font-size: 22px;
+    }
+
+    .benefit h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .benefit p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cta {
+      max-width: 820px;
+      margin: 18px auto 62px;
+      padding: 28px;
+    }
+
+    .cta-center {
+      text-align: center;
+    }
+
+    .cta h2 {
+      margin: 14px 0 10px;
+      font-size: clamp(31px, 4.5vw, 48px);
+      line-height: 1.12;
+    }
+
+    .intro {
+      margin: 0 auto 20px;
+      max-width: 650px;
+      color: #cbd5e1;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .price-box {
+      max-width: 430px;
+      margin: 18px auto 0;
+      border: 1px solid rgba(134, 239, 172, 0.22);
+      background: rgba(134, 239, 172, 0.10);
+      border-radius: 24px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .price-box strong {
+      display: block;
+      color: #dcfce7;
+      font-size: 16px;
+    }
+
+    .price-box span {
+      display: block;
+      margin-top: 5px;
+      color: #cbd5e1;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.055);
+      color: white;
+      border-radius: 16px;
+      outline: none;
+      padding: 0 14px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(103, 232, 249, 0.45);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #64748b;
+    }
+
+    textarea {
+      min-height: 96px;
+      padding: 12px 14px;
+      resize: vertical;
+    }
+
+    .wide {
+      grid-column: 1 / -1;
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 16px 0;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.7;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .consent input {
+      width: 18px;
+      min-height: 18px;
+      margin-top: 3px;
+      flex: 0 0 auto;
+    }
+
+    .submit-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .status {
+      display: none;
+      margin-top: 14px;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .status.ok {
+      display: block;
+      border: 1px solid rgba(134, 239, 172, 0.25);
+      background: rgba(134, 239, 172, 0.10);
+      color: #bbf7d0;
+    }
+
+    .status.err {
+      display: block;
+      border: 1px solid rgba(252, 165, 165, 0.25);
+      background: rgba(252, 165, 165, 0.10);
+      color: #fecaca;
+    }
+
+    .note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    details {
+      margin: 18px auto 0;
+      max-width: 650px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 18px;
+      padding: 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    summary {
+      cursor: pointer;
+      color: #cbd5e1;
+      font-weight: 900;
+    }
+
+    .test-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .pass {
+      color: #86efac;
+      font-weight: 900;
+    }
+
+    .fail {
+      color: #fca5a5;
+      font-weight: 900;
+    }
+
+    @media (max-width: 920px) {
+      header {
+        position: static;
+      }
+
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics,
+      .report-metrics,
+      .benefit-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .table-head,
+      .upload-top,
+      .benefit-head {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .risk-row {
+        grid-template-columns: 88px 1fr;
+      }
+
+      .risk-row.head div:nth-child(3),
+      .risk-row .action {
+        display: none;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .lead {
+        font-size: 17px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .wide {
+        grid-column: auto;
+      }
+    }
   </style>
 </head>
+
 <body>
-<header><div class="wrap nav"><div class="brand"><div class="logo">R</div><div><strong>RentalRisk AI</strong><span>בדיקת סיכון לשכירות</span></div></div><span class="badge green">בדיקה פרטית לפני חתימה</span></div></header>
-<main class="wrap">
-<section class="hero"><div><span class="badge cyan">בדיקה לפני פיקדון</span><h1>לפני שמעבירים פיקדון בודקים את <span class="grad">החוזה, הבעלות והסיכון</span>.</h1><p class="lead">קיבלתם חוזה? ביקשו פיקדון? בסוף הבדיקה תקבלו דוח קצר שמראה מה מסוכן, מה חסר, מה לבקש מהמשכיר ומה לא לעשות לפני העברת כסף.</p><div class="actions"><a class="btn primary" href="#lead">בדקו חוזה לפני פיקדון: 19 ₪</a><a class="btn secondary" href="#report">ראו דוח לדוגמה</a></div><div class="metrics"><div class="metric"><small>בדוח לדוגמה</small><b>3</b><span>דגלים אדומים</span></div><div class="metric"><small>מחיר פיילוט</small><b>19 ₪</b><span>לפני חתימה</span></div><div class="metric"><small>זמן בדיקה</small><b>24h</b><span>בפיילוט</span></div></div></div>
-<section class="panel report"><div class="report-head"><div><small>תצוגת מוצר</small><h2>בדיקת עסקת שכירות</h2></div><span class="badge amber">סיכון בינוני גבוה</span></div><div class="report-body"><div class="report-metrics"><div class="report-metric"><small>ציון סיכון</small><b>73</b></div><div class="report-metric"><small>דגלים אדומים</small><b>3</b></div><div class="report-metric"><small>מחיר פיילוט</small><b>19 ₪</b></div></div><div class="recommend"><strong>הפעולה המומלצת</strong><p>לבקש נסח טאבו או אישור זכויות, לוודא הרשאה לחתימה, ולא להעביר פיקדון לפני שהמסמכים תואמים.</p></div><div class="included"><strong>מה מקבלים בדוח</strong><p>ציון סיכון, מסמכים חסרים, דגלים אדומים ושאלות מדויקות לשליחה למשכיר.</p></div></div></section></section>
-<section id="report" class="grid"><section class="panel card-pad"><div class="upload-top"><div><span class="badge cyan section-badge">מסמכי עסקה</span><h2 class="card-title">העלאת מסמכים</h2><p class="sub">בחרו עד 3 קבצים: חוזה, מודעה, נסח טאבו, ייפוי כוח או דרישת פיקדון. הקבצים יישלחו יחד עם הטופס למטה.</p></div><label class="upload-btn">בחרו קבצים<input id="fileInput" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" hidden /></label></div><div class="files" id="fileList"></div></section>
-<section class="panel card-pad"><div class="table-head"><div><span class="badge amber section-badge">דוח לדוגמה</span><h2 class="card-title">מה יופיע בדוח</h2></div><div class="score-box"><small>ציון סיכון</small><b>73</b> <span>/ 100</span></div></div><div class="risk-table"><div class="risk-row head"><div>חומרה</div><div>דגל אדום</div><div>פעולה מומלצת</div></div><div class="risk-row"><div><span class="severity high">גבוה</span></div><div><h3>חוסר התאמה בין החותם למסמך הזכויות</h3><p>לבקש מסמך הרשאה או חתימה של בעל הזכויות</p></div><div class="action"><p>לבקש מסמך הרשאה או חתימה של בעל הזכויות</p></div></div><div class="risk-row"><div><span class="severity high">גבוה</span></div><div><h3>בקשה למקדמה לפני אימות בעלות</h3><p>לא להעביר כסף לפני קבלת מסמכים מתאימים</p></div><div class="action"><p>לא להעביר כסף לפני קבלת מסמכים מתאימים</p></div></div><div class="risk-row"><div><span class="severity med">בינוני</span></div><div><h3>דרישת פיקדון וערבויות חריגה</h3><p>לבדוק אם גובה הבטוחות סביר ביחס לעסקה</p></div><div class="action"><p>לבדוק אם גובה הבטוחות סביר ביחס לעסקה</p></div></div></div></section></section>
-<section class="benefits"><div class="benefit-head"><div><div style="color:var(--muted);font-weight:800;font-size:14px">מה מקבלים</div><h2>בדיקה ממוקדת לפני חתימה</h2></div><p>המטרה היא להבין מה מסוכן, מה חסר ומה לבקש לפני שמתחייבים ומעבירים כסף.</p></div><div class="benefit-grid"><div class="benefit"><div class="benefit-icon">▤</div><h3>בדיקת חוזה</h3><p>פיקדון, ערבויות, תיקונים, יציאה מוקדמת ותשלומים חריגים.</p></div><div class="benefit"><div class="benefit-icon">⌁</div><h3>בדיקת בעלות והרשאה</h3><p>האם החותם, המסמכים ופרטי התשלום מסתדרים אחד עם השני.</p></div><div class="benefit"><div class="benefit-icon">✎</div><h3>מה לשלוח למשכיר</h3><p>הודעה מוכנה לבקשת נסח, ייפוי כוח, הבהרות ותיקונים לפני חתימה.</p></div></div></section>
-<section class="panel cta" id="lead"><div class="cta-center"><span class="badge green">התחילו בדיקה</span><h2>קיבלתם חוזה או דרישת פיקדון?</h2><p class="intro">צרפו מסמכים, מלאו פרטים, ונחזור אליכם עם בדיקה ראשונית.</p><div class="price-box"><strong>בדיקה ראשונית: 19 ₪</strong><span>כולל סריקת מסמכים, דוח סיכון קצר ושאלות מומלצות למשכיר.</span></div></div><form id="leadForm"><div class="form-grid"><input name="full_name" type="text" autocomplete="name" placeholder="שם מלא" /><input name="email" dir="ltr" type="email" required autocomplete="email" placeholder="your@email.com" /><input name="phone" dir="ltr" type="tel" autocomplete="tel" placeholder="050-0000000" /><input name="city" type="text" placeholder="עיר / שכונה" /><input class="wide" name="rent_price" type="text" placeholder="שכר דירה משוער, לדוגמה 6,500 ₪" /><textarea class="wide" name="message" placeholder="מה מדאיג אותך בעסקה?"></textarea></div><label class="consent"><input name="consent_accepted" type="checkbox" required /><span>אני מאשר/ת שמירת הפרטים והמסמכים לצורך בדיקת עסקת השכירות ויצירת קשר. המסמכים אינם מתפרסמים וניתן לבקש מחיקה בכל שלב. מומלץ לטשטש מספרי זהות או פרטים רגישים שאינם נחוצים לבדיקה.</span></label><div class="submit-row"><button id="submitButton" class="btn primary" type="submit">התחילו בדיקה: 19 ₪</button></div></form><div class="status" id="formStatus"></div><div class="note">RentalRisk AI מספקת בדיקת סיכון ומידע כללי בלבד ואינה מהווה ייעוץ משפטי.</div><details><summary>בדיקות תקינות פנימיות</summary><div id="selfTests"></div></details></section>
-</main>
-<script>
-const SUBMIT_LEAD_URL="https://okmbxyfruzqfeinhfdwt.supabase.co/functions/v1/submit-lead";const PRICE="19 ₪";const fileInput=document.getElementById("fileInput"),fileList=document.getElementById("fileList"),leadForm=document.getElementById("leadForm"),statusBox=document.getElementById("formStatus"),submitButton=document.getElementById("submitButton"),selfTests=document.getElementById("selfTests");let selectedFiles=[];function formatFileSize(e){return Number.isFinite(e)?e<1048576?`${Math.max(1,Math.round(e/1024))} KB`:`${(e/1048576).toFixed(1)} MB`:""}function renderFiles(){if(fileList.innerHTML="",!selectedFiles.length){fileList.innerHTML='<div class="file-row"><div class="file-main"><div class="file-icon">📄</div><div><div class="file-name">עדיין לא נבחרו קבצים</div><div class="file-meta">צריך לצרף לפחות מסמך אחד כדי לשלוח בדיקה</div></div></div></div>';return}selectedFiles.forEach((e,t)=>{const n=/\.(png|jpg|jpeg)$/i.test(e.name),i=document.createElement("div");i.className="file-row",i.innerHTML=`<div class="file-main"><div class="file-icon">${n?"🖼":"📄"}</div><div><div class="file-name"></div><div class="file-meta">מוכן לשליחה · ${formatFileSize(e.size)}</div></div></div><button class="remove" type="button">הסר</button>`,i.querySelector(".file-name").textContent=e.name,i.querySelector(".remove").addEventListener("click",()=>{selectedFiles.splice(t,1),renderFiles()}),fileList.appendChild(i)})}function setStatus(e,t){statusBox.className=e?`status ${e}`:"status",statusBox.textContent=t||""}function renderSelfTests(){[{name:"הכותרת מתמקדת בפיקדון ובסיכון",pass:document.body.textContent.includes("פיקדון")&&document.body.textContent.includes("סיכון")},{name:"המחיר הוא 19 ₪",pass:"19 ₪"===PRICE&&document.body.textContent.includes("19 ₪")},{name:"הטופס מחובר לכתובת submit-lead",pass:SUBMIT_LEAD_URL.includes("/functions/v1/submit-lead")},{name:"יש דרישת הסכמה לפני שליחה",pass:!!document.querySelector("input[name='consent_accepted']")}].forEach(e=>{selfTests.innerHTML+=`<div class="test-row"><span>${e.name}</span><span class="${e.pass?"pass":"fail"}">${e.pass?"עבר":"נכשל"}</span></div>`})}fileInput.addEventListener("change",function(){selectedFiles=Array.from(this.files||[]).slice(0,3),renderFiles()}),leadForm.addEventListener("submit",async function(e){e.preventDefault();if(!selectedFiles.length){setStatus("err","צריך לצרף לפחות מסמך אחד לפני שליחה.");return}const t=new FormData(leadForm);t.set("consent_accepted",leadForm.elements.consent_accepted.checked?"true":"false"),selectedFiles.forEach(e=>t.append("files",e,e.name)),submitButton.disabled=!0,submitButton.textContent="שולח...",setStatus("","");try{const e=await fetch(SUBMIT_LEAD_URL,{method:"POST",body:t}),n=await e.json().catch(()=>({}));if(!e.ok||!n.ok)throw new Error(n.error||"השליחה נכשלה. נסו שוב.");setStatus("ok","הפרטים והמסמכים נשלחו בהצלחה. נחזור אליכם עם בדיקה ראשונית."),leadForm.reset(),selectedFiles=[],renderFiles()}catch(e){setStatus("err",e.message||"השליחה נכשלה. נסו שוב.")}finally{submitButton.disabled=!1,submitButton.textContent="התחילו בדיקה: 19 ₪"}}),renderFiles(),renderSelfTests();
-</script>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo">R</div>
+        <div>
+          <strong>RentalRisk AI</strong>
+          <span>בדיקת סיכון לשכירות</span>
+        </div>
+      </div>
+
+      <span class="badge green">בדיקה פרטית לפני חתימה</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <span class="badge cyan">בדיקה לפני פיקדון</span>
+
+        <h1>
+          לפני שמעבירים פיקדון בודקים את
+          <span class="grad">החוזה, הבעלות והסיכון</span>.
+        </h1>
+
+        <p class="lead">
+          קיבלתם חוזה? ביקשו פיקדון? בסוף הבדיקה תקבלו דוח קצר שמראה מה מסוכן, מה חסר, מה לבקש מהמשכיר ומה לא לעשות לפני העברת כסף.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="#lead">בדקו חוזה לפני פיקדון: 19 ₪</a>
+          <a class="btn secondary" href="#report">ראו דוח לדוגמה</a>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <small>בדוח לדוגמה</small>
+            <b>3</b>
+            <span>דגלים אדומים</span>
+          </div>
+
+          <div class="metric">
+            <small>מחיר פיילוט</small>
+            <b>19 ₪</b>
+            <span>לפני חתימה</span>
+          </div>
+
+          <div class="metric">
+            <small>זמן בדיקה</small>
+            <b>24h</b>
+            <span>בפיילוט</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel report">
+        <div class="report-head">
+          <div>
+            <small>תצוגת מוצר</small>
+            <h2>בדיקת עסקת שכירות</h2>
+          </div>
+
+          <span class="badge amber">סיכון בינוני גבוה</span>
+        </div>
+
+        <div class="report-body">
+          <div class="report-metrics">
+            <div class="report-metric">
+              <small>ציון סיכון</small>
+              <b>73</b>
+            </div>
+
+            <div class="report-metric">
+              <small>דגלים אדומים</small>
+              <b>3</b>
+            </div>
+
+            <div class="report-metric">
+              <small>מחיר פיילוט</small>
+              <b>19 ₪</b>
+            </div>
+          </div>
+
+          <div class="recommend">
+            <strong>הפעולה המומלצת</strong>
+            <p>לבקש נסח טאבו או אישור זכויות, לוודא הרשאה לחתימה, ולא להעביר פיקדון לפני שהמסמכים תואמים.</p>
+          </div>
+
+          <div class="included">
+            <strong>מה מקבלים בדוח</strong>
+            <p>ציון סיכון, מסמכים חסרים, דגלים אדומים ושאלות מדויקות לשליחה למשכיר.</p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="report" class="grid">
+      <section class="panel card-pad">
+        <div class="upload-top">
+          <div>
+            <span class="badge cyan">מסמכי עסקה</span>
+            <h2 class="card-title">העלאת מסמכים</h2>
+            <p class="sub">בחרו עד 3 קבצים: חוזה, מודעה, נסח טאבו, ייפוי כוח או דרישת פיקדון. הקבצים יישלחו יחד עם הטופס למטה.</p>
+          </div>
+
+          <label class="upload-btn">
+            בחרו קבצים
+            <input id="fileInput" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" hidden />
+          </label>
+        </div>
+
+        <div class="files" id="fileList"></div>
+      </section>
+
+      <section class="panel card-pad">
+        <div class="table-head">
+          <div>
+            <span class="badge amber">דוח לדוגמה</span>
+            <h2 class="card-title">מה יופיע בדוח</h2>
+          </div>
+
+          <div class="score-box">
+            <small>ציון סיכון</small>
+            <b>73</b> <span>/ 100</span>
+          </div>
+        </div>
+
+        <div class="risk-table">
+          <div class="risk-row head">
+            <div>חומרה</div>
+            <div>דגל אדום</div>
+            <div>פעולה מומלצת</div>
+          </div>
+
+          <div class="risk-row">
+            <div><span class="severity high">גבוה</span></div>
+            <div>
+              <h3>חוסר התאמה בין החותם למסמך הזכויות</h3>
+              <p>לבקש מסמך הרשאה או חתימה של בעל הזכויות</p>
+            </div>
+            <div class="action"><p>לבקש מסמך הרשאה או חתימה של בעל הזכויות</p></div>
+          </div>
+
+          <div class="risk-row">
+            <div><span class="severity high">גבוה</span></div>
+            <div>
+              <h3>בקשה למקדמה לפני אימות בעלות</h3>
+              <p>לא להעביר כסף לפני קבלת מסמכים מתאימים</p>
+            </div>
+            <div class="action"><p>לא להעביר כסף לפני קבלת מסמכים מתאימים</p></div>
+          </div>
+
+          <div class="risk-row">
+            <div><span class="severity med">בינוני</span></div>
+            <div>
+              <h3>דרישת פיקדון וערבויות חריגה</h3>
+              <p>לבדוק אם גובה הבטוחות סביר ביחס לעסקה</p>
+            </div>
+            <div class="action"><p>לבדוק אם גובה הבטוחות סביר ביחס לעסקה</p></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="benefits">
+      <div class="benefit-head">
+        <div>
+          <div style="color: var(--muted); font-weight: 800; font-size: 14px;">מה מקבלים</div>
+          <h2>בדיקה ממוקדת לפני חתימה</h2>
+        </div>
+
+        <p>המטרה היא להבין מה מסוכן, מה חסר ומה לבקש לפני שמתחייבים ומעבירים כסף.</p>
+      </div>
+
+      <div class="benefit-grid">
+        <div class="benefit">
+          <div class="benefit-icon">▤</div>
+          <h3>בדיקת חוזה</h3>
+          <p>פיקדון, ערבויות, תיקונים, יציאה מוקדמת ותשלומים חריגים.</p>
+        </div>
+
+        <div class="benefit">
+          <div class="benefit-icon">⌁</div>
+          <h3>בדיקת בעלות והרשאה</h3>
+          <p>האם החותם, המסמכים ופרטי התשלום מסתדרים אחד עם השני.</p>
+        </div>
+
+        <div class="benefit">
+          <div class="benefit-icon">✎</div>
+          <h3>מה לשלוח למשכיר</h3>
+          <p>הודעה מוכנה לבקשת נסח, ייפוי כוח, הבהרות ותיקונים לפני חתימה.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel cta" id="lead">
+      <div class="cta-center">
+        <span class="badge green">התחילו בדיקה</span>
+        <h2>קיבלתם חוזה או דרישת פיקדון?</h2>
+        <p class="intro">צרפו מסמכים, מלאו פרטים, ונחזור אליכם עם בדיקה ראשונית.</p>
+
+        <div class="price-box">
+          <strong>בדיקה ראשונית: 19 ₪</strong>
+          <span>כולל סריקת מסמכים, דוח סיכון קצר ושאלות מומלצות למשכיר.</span>
+        </div>
+      </div>
+
+      <form id="leadForm">
+        <div class="form-grid">
+          <input name="full_name" type="text" autocomplete="name" placeholder="שם מלא" />
+          <input name="email" dir="ltr" type="email" required autocomplete="email" placeholder="your@email.com" />
+          <input name="phone" dir="ltr" type="tel" autocomplete="tel" placeholder="050-0000000" />
+          <input name="city" type="text" placeholder="עיר / שכונה" />
+          <input class="wide" name="rent_price" type="text" placeholder="שכר דירה משוער, לדוגמה 6,500 ₪" />
+          <textarea class="wide" name="message" placeholder="מה מדאיג אותך בעסקה?"></textarea>
+        </div>
+
+        <label class="consent">
+          <input name="consent_accepted" type="checkbox" required />
+          <span>
+            אני מאשר/ת שמירת הפרטים והמסמכים לצורך בדיקת עסקת השכירות ויצירת קשר. המסמכים אינם מתפרסמים וניתן לבקש מחיקה בכל שלב. מומלץ לטשטש מספרי זהות או פרטים רגישים שאינם נחוצים לבדיקה.
+          </span>
+        </label>
+
+        <div class="submit-row">
+          <button id="submitButton" class="btn primary" type="submit">התחילו בדיקה: 19 ₪</button>
+        </div>
+      </form>
+
+      <div class="status" id="formStatus"></div>
+
+      <div class="note">RentalRisk AI מספקת בדיקת סיכון ומידע כללי בלבד ואינה מהווה ייעוץ משפטי.</div>
+
+      <details>
+        <summary>בדיקות תקינות פנימיות</summary>
+        <div id="selfTests"></div>
+      </details>
+    </section>
+  </main>
+
+  <script>
+    const SUBMIT_LEAD_URL = "https://okmbxyfruzqfeinhfdwt.supabase.co/functions/v1/submit-lead";
+    const PRICE = "19 ₪";
+
+    const fileInput = document.getElementById("fileInput");
+    const fileList = document.getElementById("fileList");
+    const leadForm = document.getElementById("leadForm");
+    const statusBox = document.getElementById("formStatus");
+    const submitButton = document.getElementById("submitButton");
+    const selfTests = document.getElementById("selfTests");
+
+    let selectedFiles = [];
+
+    function formatFileSize(size) {
+      if (!Number.isFinite(size)) return "";
+      if (size < 1024 * 1024) return `${Math.max(1, Math.round(size / 1024))} KB`;
+      return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+    }
+
+    function renderFiles() {
+      fileList.innerHTML = "";
+
+      if (!selectedFiles.length) {
+        fileList.innerHTML = `
+          <div class="file-row">
+            <div class="file-main">
+              <div class="file-icon">📄</div>
+              <div>
+                <div class="file-name">עדיין לא נבחרו קבצים</div>
+                <div class="file-meta">צריך לצרף לפחות מסמך אחד כדי לשלוח בדיקה</div>
+              </div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      selectedFiles.forEach((file, index) => {
+        const isImage = /\.(png|jpg|jpeg)$/i.test(file.name);
+        const row = document.createElement("div");
+        row.className = "file-row";
+        row.innerHTML = `
+          <div class="file-main">
+            <div class="file-icon">${isImage ? "🖼" : "📄"}</div>
+            <div>
+              <div class="file-name"></div>
+              <div class="file-meta">מוכן לשליחה · ${formatFileSize(file.size)}</div>
+            </div>
+          </div>
+          <button class="remove" type="button">הסר</button>
+        `;
+
+        row.querySelector(".file-name").textContent = file.name;
+        row.querySelector(".remove").addEventListener("click", () => {
+          selectedFiles.splice(index, 1);
+          renderFiles();
+        });
+
+        fileList.appendChild(row);
+      });
+    }
+
+    function setStatus(type, message) {
+      statusBox.className = type ? `status ${type}` : "status";
+      statusBox.textContent = message || "";
+    }
+
+    function renderSelfTests() {
+      const tests = [
+        {
+          name: "הכותרת מתמקדת בפיקדון ובסיכון",
+          pass: document.body.textContent.includes("פיקדון") && document.body.textContent.includes("סיכון"),
+        },
+        {
+          name: "המחיר הוא 19 ₪",
+          pass: PRICE === "19 ₪" && document.body.textContent.includes("19 ₪"),
+        },
+        {
+          name: "הטופס מחובר לכתובת submit-lead",
+          pass: SUBMIT_LEAD_URL.includes("/functions/v1/submit-lead"),
+        },
+        {
+          name: "יש דרישת הסכמה לפני שליחה",
+          pass: Boolean(document.querySelector("input[name='consent_accepted']")),
+        },
+      ];
+
+      selfTests.innerHTML = tests
+        .map((test) => `
+          <div class="test-row">
+            <span>${test.name}</span>
+            <span class="${test.pass ? "pass" : "fail"}">${test.pass ? "עבר" : "נכשל"}</span>
+          </div>
+        `)
+        .join("");
+    }
+
+    fileInput.addEventListener("change", function () {
+      selectedFiles = Array.from(this.files || []).slice(0, 3);
+      renderFiles();
+    });
+
+    leadForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      if (!selectedFiles.length) {
+        setStatus("err", "צריך לצרף לפחות מסמך אחד לפני שליחה.");
+        return;
+      }
+
+      const form = new FormData(leadForm);
+      form.set(
+        "consent_accepted",
+        leadForm.elements["consent_accepted"].checked ? "true" : "false"
+      );
+
+      selectedFiles.forEach((file) => {
+        form.append("files", file, file.name);
+      });
+
+      submitButton.disabled = true;
+      submitButton.textContent = "שולח...";
+      setStatus("", "");
+
+      try {
+        const response = await fetch(SUBMIT_LEAD_URL, {
+          method: "POST",
+          body: form,
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || !result.ok) {
+          throw new Error(result.error || "השליחה נכשלה. נסו שוב.");
+        }
+
+        const token = result.submission_token;
+
+        if (token) {
+          window.location.href = `/status.html?token=${encodeURIComponent(token)}`;
+          return;
+        }
+
+        setStatus("ok", "הפרטים והמסמכים נשלחו בהצלחה. נחזור אליכם עם בדיקה ראשונית.");
+        leadForm.reset();
+        selectedFiles = [];
+        renderFiles();
+      } catch (error) {
+        setStatus("err", error.message || "השליחה נכשלה. נסו שוב.");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "התחילו בדיקה: 19 ₪";
+      }
+    });
+
+    renderFiles();
+    renderSelfTests();
+  </script>
 </body>
 </html>
