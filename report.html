@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>דוח בדיקה | RentalRisk AI</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.12);
+      --text: #e5eefb;
+      --muted: #94a3b8;
+      --cyan: #67e8f9;
+      --green: #86efac;
+      --amber: #fbbf24;
+      --red: #fca5a5;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans Hebrew", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 82% -8%, rgba(103,232,249,.16), transparent 32%),
+        radial-gradient(circle at 6% 36%, rgba(134,239,172,.10), transparent 28%),
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.06), transparent 34%),
+        var(--bg);
+      line-height: 1.75;
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 18px 54px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      color: #07111f;
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 14px 36px rgba(45,212,191,.22);
+    }
+
+    .brand strong {
+      display: block;
+      color: white;
+      font-size: 16px;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .badge {
+      border: 1px solid rgba(251,191,36,.28);
+      background: rgba(251,191,36,.10);
+      color: #fef3c7;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 24px 90px rgba(0,0,0,.32);
+      backdrop-filter: blur(18px);
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .metric {
+      border: 1px solid var(--border);
+      background: var(--panel2);
+      border-radius: 20px;
+      padding: 14px;
+    }
+
+    .metric small {
+      display: block;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .metric b {
+      display: block;
+      margin-top: 4px;
+      color: white;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    .risk-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      font-weight: 900;
+      width: max-content;
+      margin-top: 7px;
+    }
+
+    .risk-high {
+      border: 1px solid rgba(252,165,165,.30);
+      background: rgba(252,165,165,.13);
+      color: #fee2e2;
+    }
+
+    .risk-medium-high {
+      border: 1px solid rgba(251,191,36,.30);
+      background: rgba(251,191,36,.13);
+      color: #fef3c7;
+    }
+
+    .risk-medium {
+      border: 1px solid rgba(103,232,249,.28);
+      background: rgba(103,232,249,.11);
+      color: #cffafe;
+    }
+
+    .risk-low {
+      border: 1px solid rgba(134,239,172,.28);
+      background: rgba(134,239,172,.11);
+      color: #dcfce7;
+    }
+
+    .report-content {
+      background: white;
+      color: #111827;
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .report-content h1 {
+      margin: 0 0 14px;
+      font-size: 30px;
+      line-height: 1.3;
+      color: #111827;
+    }
+
+    .summary {
+      margin: 0 0 20px;
+      color: #1f2937;
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.35;
+      color: #111827;
+    }
+
+    ul {
+      margin: 0;
+      padding-right: 24px;
+    }
+
+    li {
+      margin-bottom: 9px;
+    }
+
+    .flags {
+      display: grid;
+      gap: 12px;
+    }
+
+    .flag {
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      border-radius: 18px;
+      padding: 15px;
+    }
+
+    .flag-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .flag h3 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.35;
+      color: #111827;
+    }
+
+    .severity {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .sev-high {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .sev-medium {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .sev-low {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .flag p {
+      margin: 7px 0;
+      color: #374151;
+      line-height: 1.7;
+    }
+
+    .action-text {
+      border-right: 3px solid #67e8f9;
+      padding-right: 10px;
+      color: #111827 !important;
+      font-weight: 700;
+    }
+
+    .disclaimer {
+      margin-top: 24px;
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      border-radius: 16px;
+      min-height: 44px;
+      padding: 0 16px;
+      font-weight: 900;
+      color: #07111f;
+      background: linear-gradient(90deg, var(--cyan), #5eead4, var(--green));
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button.secondary {
+      color: white;
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--border);
+    }
+
+    .footer {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .loading,
+    .error {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 24px;
+      padding: 22px;
+      color: #cbd5e1;
+      text-align: center;
+    }
+
+    .error {
+      border-color: rgba(252,165,165,.25);
+      background: rgba(252,165,165,.10);
+      color: #fecaca;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      .top,
+      .footer,
+      .actions {
+        display: none;
+      }
+
+      .wrap {
+        max-width: none;
+        padding: 0;
+      }
+
+      .card {
+        box-shadow: none;
+        border: 0;
+        background: white;
+        padding: 0;
+      }
+
+      .meta {
+        margin-bottom: 14px;
+      }
+
+      .metric {
+        border: 1px solid #ddd;
+        background: white;
+      }
+
+      .metric small,
+      .metric b {
+        color: black;
+      }
+
+      .report-content {
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .meta {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .report-content {
+        padding: 18px;
+      }
+
+      .flag-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="logo">R</div>
+        <div>
+          <strong>RentalRisk AI</strong>
+          <span>דוח סיכון לשכירות</span>
+        </div>
+      </div>
+
+      <div class="badge">דוח ראשוני</div>
+    </div>
+
+    <div id="app" class="loading">טוען דוח...</div>
+
+    <div class="footer">
+      הדוח הוא בדיקת סיכון ראשונית בלבד ואינו מהווה ייעוץ משפטי.
+    </div>
+  </main>
+
+  <script>
+    const REPORT_JSON_URL = "https://okmbxyfruzqfeinhfdwt.supabase.co/functions/v1/get-report-json";
+
+    const app = document.getElementById("app");
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function riskLevelLabel(level) {
+      const normalized = String(level || "").toLowerCase();
+
+      if (normalized === "low") return "נמוך";
+      if (normalized === "medium") return "בינוני";
+      if (normalized === "medium_high") return "בינוני גבוה";
+      if (normalized === "high") return "גבוה";
+
+      return level || "לא ידוע";
+    }
+
+    function riskBadgeClass(level) {
+      const normalized = String(level || "").toLowerCase();
+
+      if (normalized === "high") return "risk-high";
+      if (normalized === "medium_high") return "risk-medium-high";
+      if (normalized === "medium") return "risk-medium";
+      if (normalized === "low") return "risk-low";
+
+      return "risk-medium";
+    }
+
+    function severityLabel(level) {
+      const normalized = String(level || "").toLowerCase();
+
+      if (normalized === "high") return "גבוה";
+      if (normalized === "medium") return "בינוני";
+      if (normalized === "low") return "נמוך";
+
+      return level || "לא ידוע";
+    }
+
+    function severityClass(level) {
+      const normalized = String(level || "").toLowerCase();
+
+      if (normalized === "high") return "sev-high";
+      if (normalized === "medium") return "sev-medium";
+      if (normalized === "low") return "sev-low";
+
+      return "sev-medium";
+    }
+
+    function statusLabel(status) {
+      const normalized = String(status || "").toLowerCase();
+
+      if (normalized === "draft") return "טיוטה";
+      if (normalized === "approved") return "מאושר";
+      if (normalized === "sent") return "נשלח";
+      if (normalized === "final") return "סופי";
+
+      return status || "טיוטה";
+    }
+
+    function renderList(items) {
+      if (!Array.isArray(items) || items.length === 0) {
+        return "<p>לא צוינו.</p>";
+      }
+
+      return `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    }
+
+    function renderFlags(flags) {
+      if (!Array.isArray(flags) || flags.length === 0) {
+        return "<p>לא זוהו דגלים אדומים משמעותיים במסמכים שצורפו.</p>";
+      }
+
+      return `
+        <div class="flags">
+          ${flags.map((flag) => `
+            <article class="flag">
+              <div class="flag-top">
+                <h3>${escapeHtml(flag.title || "דגל אדום")}</h3>
+                <span class="severity ${severityClass(flag.severity)}">${escapeHtml(severityLabel(flag.severity))}</span>
+              </div>
+              <p>${escapeHtml(flag.explanation || "")}</p>
+              <p class="action-text">פעולה מומלצת: ${escapeHtml(flag.recommended_action || "")}</p>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function normalizeReport(data) {
+      const reportJson = data?.report?.report_json || {};
+      const report = data?.report || {};
+
+      return {
+        risk_score: reportJson.risk_score ?? report.risk_score ?? "",
+        risk_level: reportJson.risk_level ?? report.risk_level ?? "",
+        status: report.status || "draft",
+        summary: reportJson.summary || "",
+        missing_documents: reportJson.missing_documents || [],
+        red_flags: reportJson.red_flags || [],
+        questions_to_landlord: reportJson.questions_to_landlord || [],
+        do_not_do_before: reportJson.do_not_do_before || [],
+        disclaimer: reportJson.disclaimer || "הדוח הוא בדיקת סיכון ראשונית בלבד ואינו ייעוץ משפטי.",
+      };
+    }
+
+    function renderReport(data) {
+      const report = normalizeReport(data);
+      const riskLabel = riskLevelLabel(report.risk_level);
+      const badgeClass = riskBadgeClass(report.risk_level);
+
+      app.className = "card";
+      app.innerHTML = `
+        <div class="meta">
+          <div class="metric">
+            <small>ציון סיכון</small>
+            <b>${escapeHtml(report.risk_score)} / 100</b>
+          </div>
+
+          <div class="metric">
+            <small>רמת סיכון</small>
+            <span class="risk-pill ${badgeClass}">${escapeHtml(riskLabel)}</span>
+          </div>
+
+          <div class="metric">
+            <small>סטטוס</small>
+            <b>${escapeHtml(statusLabel(report.status))}</b>
+          </div>
+        </div>
+
+        <div class="report-content">
+          <h1>דוח סיכון ראשוני לעסקת שכירות</h1>
+
+          <p class="summary">${escapeHtml(report.summary)}</p>
+
+          <div class="section">
+            <h2>מסמכים חסרים</h2>
+            ${renderList(report.missing_documents)}
+          </div>
+
+          <div class="section">
+            <h2>דגלים אדומים</h2>
+            ${renderFlags(report.red_flags)}
+          </div>
+
+          <div class="section">
+            <h2>שאלות לשליחה למשכיר</h2>
+            ${renderList(report.questions_to_landlord)}
+          </div>
+
+          <div class="section">
+            <h2>לא לעשות לפני</h2>
+            ${renderList(report.do_not_do_before)}
+          </div>
+
+          <p class="disclaimer">${escapeHtml(report.disclaimer)}</p>
+        </div>
+
+        <div class="actions">
+          <button class="button" onclick="window.print()">הדפסה / שמירה כ-PDF</button>
+          <a class="button secondary" href="/">חזרה לאתר</a>
+        </div>
+      `;
+    }
+
+    async function loadReport() {
+      if (!token) {
+        app.className = "error";
+        app.textContent = "לא נמצא מזהה דוח. חזרו לעמוד הסטטוס ופתחו את הדוח משם.";
+        return;
+      }
+
+      try {
+        const response = await fetch(`${REPORT_JSON_URL}?token=${encodeURIComponent(token)}`);
+        const data = await response.json();
+
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || "לא ניתן לטעון את הדוח");
+        }
+
+        renderReport(data);
+      } catch (error) {
+        app.className = "error";
+        app.textContent = error.message || "שגיאה בטעינת הדוח.";
+      }
+    }
+
+    loadReport();
+  </script>
+</body>
+</html>
