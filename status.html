@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>סטטוס בדיקה | RentalRisk AI</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(255,255,255,.055);
+      --border: rgba(255,255,255,.12);
+      --muted: #94a3b8;
+      --cyan: #67e8f9;
+      --green: #86efac;
+      --amber: #fbbf24;
+      --red: #fca5a5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, "Noto Sans Hebrew", sans-serif;
+      color: white;
+      background:
+        radial-gradient(circle at 82% -8%, rgba(103,232,249,.16), transparent 32%),
+        radial-gradient(circle at 6% 36%, rgba(134,239,172,.10), transparent 28%),
+        var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      line-height: 1.7;
+    }
+
+    .card {
+      width: min(760px, 100%);
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 24px 90px rgba(0,0,0,.32);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      color: #07111f;
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .brand strong { display: block; }
+    .brand span { display: block; color: var(--muted); font-size: 12px; }
+
+    .pill {
+      display: inline-flex;
+      border-radius: 999px;
+      border: 1px solid rgba(103,232,249,.25);
+      background: rgba(103,232,249,.10);
+      color: #cffafe;
+      padding: 8px 13px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 16px 0 8px;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -.035em;
+    }
+
+    p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 16px;
+    }
+
+    .steps {
+      margin: 24px 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: 20px;
+      padding: 14px;
+    }
+
+    .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      font-weight: 900;
+      font-size: 13px;
+      background: rgba(255,255,255,.08);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .step.done .dot {
+      background: rgba(134,239,172,.13);
+      border-color: rgba(134,239,172,.30);
+      color: #dcfce7;
+    }
+
+    .step.current .dot {
+      background: rgba(251,191,36,.13);
+      border-color: rgba(251,191,36,.30);
+      color: #fef3c7;
+    }
+
+    .step strong { display: block; color: white; }
+    .step span { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      min-height: 48px;
+      border: 0;
+      border-radius: 16px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .primary {
+      color: #07111f;
+      background: linear-gradient(90deg, var(--cyan), #5eead4, var(--green));
+    }
+
+    .secondary {
+      color: white;
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--border);
+    }
+
+    .status-box {
+      margin-top: 18px;
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    .error {
+      border-color: rgba(252,165,165,.25);
+      background: rgba(252,165,165,.10);
+      color: #fecaca;
+    }
+
+    .small {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media(max-width: 600px) {
+      .card { padding: 22px; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">
+      <div class="logo">R</div>
+      <div>
+        <strong>RentalRisk AI</strong>
+        <span>סטטוס בדיקת שכירות</span>
+      </div>
+    </div>
+
+    <span class="pill" id="statusPill">בודקים סטטוס</span>
+
+    <h1 id="title">קיבלנו את המסמכים</h1>
+    <p id="subtitle">הבדיקה בתהליך. אפשר להשאיר את העמוד פתוח, הוא יתעדכן אוטומטית.</p>
+
+    <div class="steps">
+      <div class="step done" id="stepReceived">
+        <div class="dot">1</div>
+        <div>
+          <strong>המסמכים התקבלו</strong>
+          <span>הטופס והקבצים נשמרו במערכת.</span>
+        </div>
+      </div>
+
+      <div class="step current" id="stepProcessing">
+        <div class="dot">2</div>
+        <div>
+          <strong>בדיקה ראשונית</strong>
+          <span>אנחנו בודקים אם המסמכים רלוונטיים ומכינים דוח.</span>
+        </div>
+      </div>
+
+      <div class="step" id="stepReady">
+        <div class="dot">3</div>
+        <div>
+          <strong>הדוח מוכן</strong>
+          <span>כשהדוח מוכן, יופיע כאן כפתור לפתיחה.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions" id="actions">
+      <a class="btn secondary" href="/">חזרה לאתר</a>
+    </div>
+
+    <div class="status-box" id="rawStatus">טוען סטטוס...</div>
+
+    <div class="small">
+      הדוח הוא בדיקת סיכון ראשונית בלבד ואינו מהווה ייעוץ משפטי.
+    </div>
+  </main>
+
+  <script>
+    const STATUS_URL = "https://okmbxyfruzqfeinhfdwt.supabase.co/functions/v1/get-submission-status";
+
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+    const statusPill = document.getElementById("statusPill");
+    const title = document.getElementById("title");
+    const subtitle = document.getElementById("subtitle");
+    const rawStatus = document.getElementById("rawStatus");
+    const actions = document.getElementById("actions");
+
+    const stepProcessing = document.getElementById("stepProcessing");
+    const stepReady = document.getElementById("stepReady");
+
+    function setStepReady() {
+      stepProcessing.classList.remove("current");
+      stepProcessing.classList.add("done");
+      stepReady.classList.add("done");
+      stepReady.classList.remove("current");
+    }
+
+    function setStepFailed() {
+      stepProcessing.classList.remove("current");
+      stepProcessing.classList.add("done");
+      stepReady.classList.add("current");
+    }
+
+    async function loadStatus() {
+      if (!token) {
+        statusPill.textContent = "חסר מזהה";
+        title.textContent = "לא נמצא מזהה בדיקה";
+        subtitle.textContent = "חזור לאתר ושלח את הטופס מחדש.";
+        rawStatus.textContent = "Missing token";
+        rawStatus.classList.add("error");
+        return;
+      }
+
+      try {
+        const response = await fetch(`${STATUS_URL}?token=${encodeURIComponent(token)}`);
+        const data = await response.json();
+
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || "לא ניתן לטעון סטטוס");
+        }
+
+        if (data.status === "ready" && data.report?.url) {
+          setStepReady();
+          statusPill.textContent = "הדוח מוכן";
+          title.textContent = "הדוח הראשוני מוכן";
+          subtitle.textContent = "אפשר לפתוח את הדוח ולראות את ציון הסיכון, הדגלים האדומים והשאלות למשכיר.";
+          rawStatus.textContent = `ציון סיכון: ${data.report.risk_score} / 100`;
+          rawStatus.classList.remove("error");
+
+          actions.innerHTML = `
+            <a class="btn primary" href="${data.report.url}">פתח דוח</a>
+            <a class="btn secondary" href="/">חזרה לאתר</a>
+          `;
+          return;
+        }
+
+        if (data.status === "failed") {
+          setStepFailed();
+          statusPill.textContent = "נדרשת בדיקה";
+          title.textContent = "לא הצלחנו להשלים את הדוח אוטומטית";
+          subtitle.textContent = "הפרטים נשמרו, ונבדוק את זה ידנית.";
+          rawStatus.textContent = data.error || "הבדיקה נכשלה.";
+          rawStatus.classList.add("error");
+          return;
+        }
+
+        statusPill.textContent = data.status === "processing" ? "הבדיקה בתהליך" : "המסמכים התקבלו";
+        title.textContent = "הבדיקה בתהליך";
+        subtitle.textContent = "אפשר להשאיר את העמוד פתוח. נעדכן כאן כשהדוח יהיה מוכן.";
+        rawStatus.textContent = "עדיין אין דוח מוכן.";
+        rawStatus.classList.remove("error");
+
+      } catch (error) {
+        statusPill.textContent = "שגיאה";
+        title.textContent = "לא הצלחנו לטעון את הסטטוס";
+        subtitle.textContent = "נסה לרענן את העמוד בעוד רגע.";
+        rawStatus.textContent = error.message || "Unknown error";
+        rawStatus.classList.add("error");
+      }
+    }
+
+    loadStatus();
+    setInterval(loadStatus, 8000);
+  </script>
+</body>
+</html>
