@@ -208,7 +208,7 @@
     <span class="pill" id="statusPill">בודקים סטטוס</span>
 
     <h1 id="title">קיבלנו את המסמכים</h1>
-    <p id="subtitle">הבדיקה בתהליך. אפשר להשאיר את העמוד פתוח, הוא יתעדכן אוטומטית.</p>
+    <p id="subtitle">הבדיקה בתהליך. כשיהיה דוח מוכן נעביר אותך אוטומטית לתוצאות.</p>
 
     <div class="steps">
       <div class="step done" id="stepReceived">
@@ -230,8 +230,8 @@
       <div class="step" id="stepReady">
         <div class="dot">3</div>
         <div>
-          <strong>הדוח מוכן</strong>
-          <span>כשהדוח מוכן, יופיע כאן כפתור לפתיחה.</span>
+          <strong>מעבר לדוח</strong>
+          <span>כשהדוח מוכן, נעביר אותך לדף התוצאות.</span>
         </div>
       </div>
     </div>
@@ -261,6 +261,8 @@
 
     const stepProcessing = document.getElementById("stepProcessing");
     const stepReady = document.getElementById("stepReady");
+
+    let redirected = false;
 
     function setStepReady() {
       stepProcessing.classList.remove("current");
@@ -295,18 +297,29 @@
 
         if (data.status === "ready" && data.report?.token) {
           setStepReady();
-          statusPill.textContent = "הדוח מוכן";
-          title.textContent = "הדוח הראשוני מוכן";
-          subtitle.textContent = "אפשר לפתוח את הדוח ולראות את ציון הסיכון, הדגלים האדומים והשאלות למשכיר.";
-          rawStatus.textContent = `ציון סיכון: ${data.report.risk_score} / 100`;
-          rawStatus.classList.remove("error");
 
           const localReportUrl = `/report.html?token=${encodeURIComponent(data.report.token)}`;
 
+          statusPill.textContent = "הדוח מוכן";
+          title.textContent = "הדוח מוכן";
+          subtitle.textContent = "מעבירים אותך עכשיו לדף התוצאות.";
+          rawStatus.textContent = data.report.report_type === "irrelevant"
+            ? "המסמך אינו מתאים לבדיקת שכירות. מעבירים לתוצאות."
+            : `ציון סיכון: ${data.report.risk_score} / 100`;
+          rawStatus.classList.remove("error");
+
           actions.innerHTML = `
-            <a class="btn primary" href="${localReportUrl}">פתח דוח</a>
+            <a class="btn primary" href="${localReportUrl}">פתח דוח עכשיו</a>
             <a class="btn secondary" href="/">חזרה לאתר</a>
           `;
+
+          if (!redirected) {
+            redirected = true;
+            window.setTimeout(() => {
+              window.location.href = localReportUrl;
+            }, 900);
+          }
+
           return;
         }
 
@@ -322,7 +335,7 @@
 
         statusPill.textContent = data.status === "processing" ? "הבדיקה בתהליך" : "המסמכים התקבלו";
         title.textContent = "הבדיקה בתהליך";
-        subtitle.textContent = "אפשר להשאיר את העמוד פתוח. נעדכן כאן כשהדוח יהיה מוכן.";
+        subtitle.textContent = "אפשר להשאיר את העמוד פתוח. נעביר אותך לדוח כשהוא יהיה מוכן.";
         rawStatus.textContent = "עדיין אין דוח מוכן.";
         rawStatus.classList.remove("error");
 
@@ -336,7 +349,7 @@
     }
 
     loadStatus();
-    setInterval(loadStatus, 8000);
+    setInterval(loadStatus, 4000);
   </script>
 </body>
 </html>
